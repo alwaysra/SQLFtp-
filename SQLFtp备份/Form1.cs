@@ -34,7 +34,7 @@ namespace SQLFtp备份
             {
                 tb_sqlpwd.Text = EnPassword.EnPasswordJJ(sqlpwd, 12138, false);
             }
-            else { tb_sqlpwd.Text = "jz8203865"; }
+            else { tb_sqlpwd.Text = ""; }
             string dbnamestr = ConfigGetValue("Dbnames");
             lb_db.Items.Clear();
             if (dbnamestr != "")
