@@ -436,10 +436,10 @@ namespace SQLFtp备份
         private void ftp_upfiles(){
             string bfpath = Application.StartupPath + "\\";//将当前目录作为备份目录
             //备份文件名 
-            tb_re.Text = DateTime.Now.ToString("yyyy-MM-dd_hhmmss") + "开始执行\r\n";
+            tb_re.Text = DateTime.Now.ToString("yyyy-MM-dd_HHmmss") + "开始执行\r\n";
             for (int i = 0; i < lb_db.Items.Count; i++)
             {
-                string bffilename_b = DateTime.Now.ToString("yyyy-MM-dd_hhmmss");
+                string bffilename_b = DateTime.Now.ToString("yyyy-MM-dd_HHmmss");
                 lb_db.SelectedIndex = i;//选中第i列
                 string bfdb = lb_db.SelectedItem.ToString();//设置备份数据库为选中文本
                 tb_re.Text += "1.正在备份数据库【" + bfdb + "】\r\n";
