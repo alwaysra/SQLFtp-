@@ -13,6 +13,7 @@ using System.IO;
 using System.Configuration;
 using Microsoft.VisualBasic;
 using EnPass;
+using System.Net.Sockets;
 
 namespace SQLFtp备份
 {
@@ -196,6 +197,7 @@ namespace SQLFtp备份
 
         private void bt_ftptext_Click(object sender, EventArgs e)
         {
+
             FTPHelper ftp = new FTPHelper(tb_ftpserver.Text + ":" + tb_ftpport.Text, "/", tb_ftpuser.Text, tb_ftppwd.Text);
             try
             {
@@ -204,7 +206,8 @@ namespace SQLFtp备份
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message.ToString());
+                //MessageBox.Show(ex.Message.ToString());
+                tb_re.Text = ex.Message.ToString();
             }
 
         }
@@ -448,7 +451,14 @@ namespace SQLFtp备份
                     tb_re.Text += "2.正在压缩备份文件【" + bffilename + "】\r\n";
                     rarfile(bfpath + bffilename + ".rar", bfpath + bffilename);
                     tb_re.Text += "3.正在上传备份压缩文件【" + bffilename + ".rar" + "】\r\n";
-                    ftp_fileup(tb_ftpserver.Text + ":" + tb_ftpport.Text, tb_ftpuser.Text, tb_ftppwd.Text, bfdb, bffilename + ".rar");
+                    try
+                    {
+                        ftp_fileup(tb_ftpserver.Text + ":" + tb_ftpport.Text, tb_ftpuser.Text, tb_ftppwd.Text, bfdb, bffilename + ".rar");
+                    }
+                    catch (Exception ex)
+                    {
+                        tb_re.Text += "错误:"+ex.Message.ToString()+"\r\n";
+                    }
                     tb_re.Text += "4.正在清理压缩文件【" + bffilename + ".rar" + "】\r\n";
                     File.Delete(bffilename + ".rar");
                 }
