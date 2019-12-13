@@ -19,10 +19,20 @@ namespace SQLFtp备份
 {
     public partial class Form1 : Form
     {
+        private string enddate;
+
         public Form1()
         {
             InitializeComponent();
         }
+
+        public Form1(string enddate)
+        {
+            InitializeComponent();
+            this.enddate = enddate;
+            this.Text += " --- "+enddate;
+        }
+
         //初始化E(Initialization)
         private void Initialization()
         {
@@ -302,7 +312,8 @@ namespace SQLFtp备份
         private void checkingKey() {
             string _key = ConfigGetValue("Key");
             if (_key != "") {
-                if (EnPassword.CheckEnPassword2("RaSQLFtp", _key)) {
+                enddate = EnPassword.CheckEnPassword2("RaSQLFtp", _key, 365);
+                if (enddate!="19700101") {
                     ftp_upfiles();
                 }
                 else

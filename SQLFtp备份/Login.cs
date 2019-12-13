@@ -17,6 +17,7 @@ namespace SQLFtp备份
     {
         private int passwdint=3;
         private bool csh=false;
+        public string enddate="";
 
         public Login()
         {
@@ -32,19 +33,21 @@ namespace SQLFtp备份
                 {
                     if (textBox1.Text != null)
                     {
-                        if (EnPassword.CheckEnPassword2("RaSQLFtp", textBox1.Text))
-                        {
-                            Form f1 = new Form1();
-                            f1.Show();
-                            this.Hide();
-                            ConfigSetValue("Key", textBox1.Text);
-                        }
-                        else
+                        DateTime todaydt = DateTime.Today;
+                        string enddate = EnPassword.CheckEnPassword2("RaSQLFtp", textBox1.Text, 365);
+                        if (enddate == "19700101")
                         {
                             MessageBox.Show("授权码无效或已过期!\n还有" + passwdint + "次机会");
                             textBox1.Text = "";
                             textBox1.Focus();
                             passwdint--;
+                        }
+                        else
+                        {
+                            Form f1 = new Form1(enddate);
+                            f1.Show();
+                            this.Hide();
+                            ConfigSetValue("Key", textBox1.Text);
                         }
                     }
                 }
@@ -91,7 +94,8 @@ namespace SQLFtp备份
                         if (passwdint > 0)
                         {
                             EnPassword myen = new EnPassword();
-                            if (EnPassword.CheckEnPassword2("RaSQLFtp", _key))
+                            enddate = EnPassword.CheckEnPassword2("RaSQLFtp", _key, 365);
+                            if (enddate!="19700101")
                             {
                                 Debug.WriteLine("_key:" + _key);
                                 Debug.WriteLine("返回成功");
