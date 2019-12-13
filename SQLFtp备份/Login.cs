@@ -74,7 +74,7 @@ namespace SQLFtp备份
             if (Initialization())
             {
                 this.Hide();
-                Form f1 = new Form1();
+                Form f1 = new Form1(enddate);
                 f1.Show();
                 this.Hide();
             }
