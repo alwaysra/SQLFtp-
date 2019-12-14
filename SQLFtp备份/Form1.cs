@@ -469,9 +469,18 @@ namespace SQLFtp备份
                     catch (Exception ex)
                     {
                         tb_re.Text += "错误:"+ex.Message.ToString()+"\r\n";
+                        tb_re.Text += "4.正在清理压缩文件【" + bffilename + ".rar" + "】\r\n";
                     }
-                    tb_re.Text += "4.正在清理压缩文件【" + bffilename + ".rar" + "】\r\n";
-                    File.Delete(bffilename + ".rar");
+                    try
+                    {
+                        File.Delete(bffilename + ".rar");
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                    
                 }
             }
             lb_db.SelectedIndex = -1;
