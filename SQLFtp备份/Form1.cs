@@ -465,6 +465,7 @@ namespace SQLFtp备份
                     try
                     {
                         ftp_fileup(tb_ftpserver.Text + ":" + tb_ftpport.Text, tb_ftpuser.Text, tb_ftppwd.Text, bfdb, bffilename + ".rar");
+
                     }
                     catch (Exception ex)
                     {
@@ -475,10 +476,9 @@ namespace SQLFtp备份
                     {
                         File.Delete(bffilename + ".rar");
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-
-                        throw;
+                        tb_re.Text += "清理压缩文件【" + bffilename + ".rar" + "】错误:"+ex.Message+"\r\n";
                     }
                     
                 }
