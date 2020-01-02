@@ -14,6 +14,7 @@ using System.Configuration;
 using Microsoft.VisualBasic;
 using EnPass;
 using System.Net.Sockets;
+using System.Net;
 
 namespace SQLFtp备份
 {
@@ -78,6 +79,19 @@ namespace SQLFtp备份
                 tb_ftppwd.Text = EnPassword.EnPasswordJJ(ftppwd, 12138, false);
             }
             else { tb_ftppwd.Text = ""; }
+            //读取完毕之后测试FTP连接
+            //如果成功则点了 启动
+            FTPHelper ftp = new FTPHelper(tb_ftpserver.Text + ":" + tb_ftpport.Text, "/", tb_ftpuser.Text, tb_ftppwd.Text);
+            try
+            {
+                ftp.GetFilesDetailList();
+                bt_start.PerformClick();
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message.ToString());
+                tb_re.Text = ex.Message.ToString();
+            }
         }
 
         /// <summary>  
@@ -462,10 +476,11 @@ namespace SQLFtp备份
                     tb_re.Text += "2.正在压缩备份文件【" + bffilename + "】\r\n";
                     rarfile(bfpath + bffilename + ".rar", bfpath + bffilename);
                     tb_re.Text += "3.正在上传备份压缩文件【" + bffilename + ".rar" + "】\r\n";
+                    FTPHelper ftp = new FTPHelper(tb_ftpserver.Text + ":" + tb_ftpport.Text, "/", tb_ftpuser.Text, tb_ftppwd.Text);
                     try
                     {
+                        ftp.GetFilesDetailList();
                         ftp_fileup(tb_ftpserver.Text + ":" + tb_ftpport.Text, tb_ftpuser.Text, tb_ftppwd.Text, bfdb, bffilename + ".rar");
-
                     }
                     catch (Exception ex)
                     {
@@ -492,5 +507,6 @@ namespace SQLFtp备份
                 }
             }
         }
+
     }
 }
