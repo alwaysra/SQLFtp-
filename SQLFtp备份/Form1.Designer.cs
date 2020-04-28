@@ -491,7 +491,7 @@
             this.tb_re.Multiline = true;
             this.tb_re.Name = "tb_re";
             this.tb_re.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tb_re.Size = new System.Drawing.Size(538, 58);
+            this.tb_re.Size = new System.Drawing.Size(538, 197);
             this.tb_re.TabIndex = 4;
             // 
             // label14
@@ -537,7 +537,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(562, 479);
+            this.ClientSize = new System.Drawing.Size(562, 618);
             this.Controls.Add(this.bt_getcon);
             this.Controls.Add(this.bt_savecon);
             this.Controls.Add(this.button1);
@@ -549,6 +549,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "SQLFtp备份";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

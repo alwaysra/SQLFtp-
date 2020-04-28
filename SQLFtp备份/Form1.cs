@@ -34,6 +34,8 @@ namespace SQLFtp备份
             this.Text += " --- "+enddate;
         }
 
+        string filenameed = "";
+
         //初始化E(Initialization)
         private void Initialization()
         {
@@ -84,7 +86,8 @@ namespace SQLFtp备份
             FTPHelper ftp = new FTPHelper(tb_ftpserver.Text + ":" + tb_ftpport.Text, "/", tb_ftpuser.Text, tb_ftppwd.Text);
             try
             {
-                ftp.GetFilesDetailList();
+                //ftp.GetFilesDetailList();
+                //ftp.GetFileList("");
                 bt_start.PerformClick();
             }
             catch (Exception ex)
@@ -298,6 +301,7 @@ namespace SQLFtp备份
                 if (numericUpDown1.Value.ToString() == h && numericUpDown2.Value.ToString() == m && s == "0") {
                     timer1.Enabled = false;
                     checkingKey();
+
                     timer1.Interval = 1000;
                     timer1.Enabled = true;
                 }
@@ -459,6 +463,7 @@ namespace SQLFtp备份
         /// FTP上传文件阵列
         /// </summary>
         private void ftp_upfiles(){
+            File.Delete(filenameed + ".rar");
             string bfpath = Application.StartupPath + "\\";//将当前目录作为备份目录
             //备份文件名 
             tb_re.Text = DateTime.Now.ToString("yyyy-MM-dd_HHmmss") + "开始执行\r\n";
@@ -469,6 +474,7 @@ namespace SQLFtp备份
                 string bfdb = lb_db.SelectedItem.ToString();//设置备份数据库为选中文本
                 tb_re.Text += "1.正在备份数据库【" + bfdb + "】\r\n";
                 string bffilename = bfdb + bffilename_b;
+                filenameed = bffilename;
                 //1.声明数据库连接字符串
                 string constr = "Server=" + tb_sqlserver.Text + ";user=" + tb_sqlname.Text + ";pwd=" + tb_sqlpwd.Text + ";database=master";
                 if (sql_backupdatabase(constr, bfdb, bfpath, bffilename) == true)
@@ -479,7 +485,8 @@ namespace SQLFtp备份
                     FTPHelper ftp = new FTPHelper(tb_ftpserver.Text + ":" + tb_ftpport.Text, "/", tb_ftpuser.Text, tb_ftppwd.Text);
                     try
                     {
-                        ftp.GetFilesDetailList();
+                        //ftp.GetFilesDetailList();
+                        //ftp.GetFileList("");
                         ftp_fileup(tb_ftpserver.Text + ":" + tb_ftpport.Text, tb_ftpuser.Text, tb_ftppwd.Text, bfdb, bffilename + ".rar");
                     }
                     catch (Exception ex)
@@ -508,5 +515,10 @@ namespace SQLFtp备份
             }
         }
 
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+            this.Close();
+        }
     }
 }
