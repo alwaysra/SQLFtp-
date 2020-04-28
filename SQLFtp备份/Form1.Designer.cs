@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.bt_adddb = new System.Windows.Forms.Button();
             this.bt_deldb = new System.Windows.Forms.Button();
@@ -42,6 +43,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cb_hide = new System.Windows.Forms.CheckBox();
             this.cb_enabledlog = new System.Windows.Forms.CheckBox();
             this.tb_djs = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -73,6 +75,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.bt_savecon = new System.Windows.Forms.Button();
             this.bt_getcon = new System.Windows.Forms.Button();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
@@ -204,6 +207,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cb_hide);
             this.groupBox2.Controls.Add(this.cb_enabledlog);
             this.groupBox2.Controls.Add(this.tb_djs);
             this.groupBox2.Controls.Add(this.label9);
@@ -223,6 +227,18 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "定时设置";
+            // 
+            // cb_hide
+            // 
+            this.cb_hide.AutoSize = true;
+            this.cb_hide.Checked = true;
+            this.cb_hide.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_hide.Location = new System.Drawing.Point(333, 18);
+            this.cb_hide.Name = "cb_hide";
+            this.cb_hide.Size = new System.Drawing.Size(96, 16);
+            this.cb_hide.TabIndex = 9;
+            this.cb_hide.Text = "最小化时隐藏";
+            this.cb_hide.UseVisualStyleBackColor = true;
             // 
             // cb_enabledlog
             // 
@@ -533,6 +549,13 @@
             this.bt_getcon.UseVisualStyleBackColor = true;
             this.bt_getcon.Click += new System.EventHandler(this.bt_getcon_Click);
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -547,10 +570,13 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.MaximizeBox = false;
             this.Name = "Form1";
+            this.ShowInTaskbar = false;
             this.Text = "SQLFtp备份";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -612,6 +638,8 @@
         private System.Windows.Forms.Button bt_savecon;
         private System.Windows.Forms.Button bt_getcon;
         private System.Windows.Forms.CheckBox cb_enabledlog;
+        private System.Windows.Forms.CheckBox cb_hide;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 
